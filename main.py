@@ -1,6 +1,28 @@
-from importFile import printOut
+from flask import Flask, request, render_template
 
-printOut()
+# utilize route variables to get data from URL line 16
+# utilize form data to collect large swaths of info at once
 
-if __name__ == ('__main__'):
-    print("run your main loop")
+app = Flask(__name__)
+
+# creating routes
+@app.route('/')
+def displayHomepage():
+    return render_template('index.html')
+
+@app.route('/formExample')
+def firstForm():
+    return render_template('form.html')
+
+@app.route('/results', methods=['GET'])
+def simple_pizza_results():
+
+    context = {
+        'pizza_flavor': request.args.get("pizza_flavor"),
+        'crust': request.args.get("crust"),
+        'individual_toppings': ['mushrooms', 'olives', 'garlic']
+    }
+    return render_template('confirmation_page.html', **context)
+
+if __name__ == "__main__":
+    app.run(debug=True, port=3000)
