@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template
+import json
 
 # utilize route variables to get data from URL line 16
 # utilize form data to collect large swaths of info at once
@@ -23,6 +24,18 @@ def simple_pizza_results():
         'individual_toppings': ['mushrooms', 'olives', 'garlic']
     }
     return render_template('confirmation_page.html', **context)
+
+
+with open('exampleObj.json') as example_obj_file:
+    print("raw file printed = ", example_obj_file)
+    jsonData = json.load(example_obj_file)
+    print("just the JSON data printed = ", jsonData)
+
+
+@app.route('jsonExample', methods=['GET'])
+def jsonRoute():
+    return jsonData
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=3000)
