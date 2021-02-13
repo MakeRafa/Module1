@@ -31,8 +31,7 @@ with open('exampleObj.json') as example_obj_file:
     jsonData = json.load(example_obj_file)
     print("just the JSON data printed = ", jsonData)
 
-
-@app.route('jsonExample', methods=['GET'])
+@app.route('/jsonExample', methods=['GET'])
 def jsonRoute():
     return jsonData
 
